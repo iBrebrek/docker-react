@@ -1,0 +1,22 @@
+# verzija docker-composea
+version: '3'
+
+# - u ymlu znači array
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"
+        volumes:
+            - /app/modules
+            - .:/app
+    tests:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/modules
+            - .:/app
+        command: ["npm", "run", "test"]
